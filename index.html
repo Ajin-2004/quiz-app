@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Computer Science Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Computer Science Quiz</h2>
+        <form id="loginForm">
+            Enter Your Email: <input type="email" id="email" placeholder="Enter your Email" required><br><br>
+            Enter Your Name: <input type="text" id="name" placeholder="Enter your Name" required><br><br>
+            Enter Your Phone no.: <input type="tel" id="phone" placeholder="Enter your Phone Number" required><br><br>
+            <button type="submit">Start Quiz</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            localStorage.setItem("user", JSON.stringify({
+                email: document.getElementById("email").value,
+                name: document.getElementById("name").value,
+                phone: document.getElementById("phone").value
+            }));
+            window.location.href = "quiz.html";
+        });
+    </script>
+</body>
+</html>
