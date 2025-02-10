@@ -16,5 +16,5 @@ A simple and interactive quiz application built using HTML, CSS, and JavaScript.
 - **CSS3**: For styling the application and creating a visually appealing design.
 - **JavaScript**: For handling the quiz logic, score calculation, and interactivity.
 
-## How to Run the Quiz App Locally
+
 
