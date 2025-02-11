@@ -171,11 +171,16 @@ function loadQuestion() {
         const button = document.createElement("button");
         button.innerText = option;
         button.onclick = () => selectAnswer(index);
-
-        // Reset background color
-        button.style.backgroundColor = "";
+        
+        // Adjust button size and spacing
+        button.style.margin = "5px 0";
+        button.style.padding = "5px 10px";
+        button.style.display = "inline-block";
+        button.style.width = "auto";
+        button.style.minWidth = "150px";
 
         optionsContainer.appendChild(button);
+        optionsContainer.appendChild(document.createElement("br")); // Add line break
     });
 
     // Disable "Next" button initially
@@ -205,6 +210,33 @@ document.getElementById("next").addEventListener("click", () => {
     if (currentQuestion < questions.length) {
         loadQuestion(); // Load the next question
     } else {
-        window.location.href = "result.html"; // Redirect after last question
+        // Collect the user's data
+        const name = prompt("Enter your name:");
+        const email = prompt("Enter your email ID:");
+        const phone = prompt("Enter your phone number:");
+
+        // Send data to Google Sheets
+        const data = {
+            name: name,
+            email: email,
+            phone: phone,
+            score: score
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbwP_zn6sX5r7HMv6qx9OQT2tjOGDsBeqDeuSzEqqe0a/dev", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => response.text())
+      .then(result => {
+          console.log("Success:", result);
+          window.location.href = "result.html"; // Redirect after submission
+      })
+      .catch(error => {
+          console.error("Error:", error);
+      });
     }
 });
